@@ -1,4 +1,4 @@
-package kr.co.justlive.android_super_simple_paging;
+package devcrema.android_super_simple_paging;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -68,6 +68,7 @@ public class SimplePaging<T> {
                             && firstVisibleItemPosition >= 0
                             && totalItemCount >= size) {
                         isLoading = true;
+                        page++;
                         onNextPageCallback.onNextPage(SimplePaging.this, page, size);
                     }
                 }

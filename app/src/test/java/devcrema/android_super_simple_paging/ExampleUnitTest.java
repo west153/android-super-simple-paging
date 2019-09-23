@@ -1,4 +1,4 @@
-package kr.co.justlive.android_super_simple_paging;
+package devcrema.android_super_simple_paging;
 
 import org.junit.Test;
 

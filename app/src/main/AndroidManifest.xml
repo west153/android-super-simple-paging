@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.co.justlive.android_super_simple_paging">
+    package="devcrema.android_super_simple_paging">
 
     <application
         android:allowBackup="true"

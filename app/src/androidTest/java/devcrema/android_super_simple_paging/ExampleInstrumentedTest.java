@@ -1,4 +1,4 @@
-package kr.co.justlive.android_super_simple_paging;
+package devcrema.android_super_simple_paging;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("kr.co.justlive.android_super_simple_paging", appContext.getPackageName());
+        assertEquals("devcrema.android_super_simple_paging", appContext.getPackageName());
     }
 }
