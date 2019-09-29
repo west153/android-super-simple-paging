@@ -1,5 +1,7 @@
 package devcrema.android_super_simple_paging;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,10 +14,9 @@ public class SimplePaging<T> {
     private RecyclerView recyclerView;
     private OnNextPageCallback onNextPageCallback;
 
-    //TODO change to builder pattern
     private int page = 0;
     private int size = 10;
-    private int preloadCount = 1;
+    private int preloadCount = 3;
 
     private boolean isLoading = false;
     private boolean isLastPage = false;
@@ -39,6 +40,10 @@ public class SimplePaging<T> {
         this.size = size;
     }
 
+    public void setPreloadCount(int preloadCount) {
+        this.preloadCount = preloadCount;
+    }
+
     public void nextPage(Collection<T> items) {
         isLoading = false;
         if(items == null || items.size() <= 0) {
@@ -51,6 +56,7 @@ public class SimplePaging<T> {
 
     public void startPaging(final OnNextPageCallback onNextPageCallback){
         this.onNextPageCallback = onNextPageCallback;
+        onNextPageCallback.onNextPage(SimplePaging.this, page, size);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -62,9 +68,12 @@ public class SimplePaging<T> {
                 int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
                 int firstVisibleItemPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
-                //TODO adjust preloadCount
+
                 if (!isLoading && !isLastPage) {
-                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                    Log.d("PAGING_LOG", "visibleItemCount: "+ visibleItemCount
+                            + " firstVisibleItemPosition: "+ firstVisibleItemPosition +
+                            " totalItemCount: "+ totalItemCount);
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount - preloadCount
                             && firstVisibleItemPosition >= 0
                             && totalItemCount >= size) {
                         isLoading = true;

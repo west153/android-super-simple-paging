@@ -14,6 +14,10 @@ public abstract class SimplePagingRecyclerAdapter <Item> extends RecyclerView.Ad
         return items;
     }
 
+    public Item getItemByPosition (int position){
+        return items.get(position);
+    }
+
     public void addItems(Collection<Item> addedItem){
         items.addAll(addedItem);
         notifyDataSetChanged();
